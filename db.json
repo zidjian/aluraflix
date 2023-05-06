@@ -1,0 +1,22 @@
+{
+    "videos": [
+        {
+            "id": 1,
+            "titulo": "",
+            "link_video": "",
+            "link_imagen": "",
+            "categoria": "",
+            "descripcion": "",
+            "codigo": ""
+        }
+    ],
+    "categorias": [
+        {
+            "id": 1,
+            "nombre": "",
+            "descripcion": "",
+            "color": "",
+            "codigo": ""
+        }
+    ]
+}
