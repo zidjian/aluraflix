@@ -22,7 +22,7 @@ const Cabecera = styled.div`
 const Descripcion = styled.p`
 `;
 
-export function Categoria({nombre, color}) {
+export function Categoria({categoria_id, nombre, color}) {
     return (
         <CategoriaGrupo>
             <Contenido>
@@ -30,7 +30,7 @@ export function Categoria({nombre, color}) {
                     <Boton color={color} >{nombre}</Boton>
                     <Descripcion>Formación Front End de Alura Latam</Descripcion>
                 </Cabecera>
-                <Carrucel color={color} />
+                <Carrucel categoria_id={categoria_id} color={color} />
             </Contenido>
         </CategoriaGrupo>
     );

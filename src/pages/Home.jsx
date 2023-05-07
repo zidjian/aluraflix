@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { Banner } from "../components/Banner";
+import { useContext } from "react";
+import { Contexto } from "../Contexto";
 import { Categoria } from "../components/Categoria";
 
 const Principal = styled.main`
@@ -7,12 +9,18 @@ const Principal = styled.main`
 `;
 
 export function Home() {
+    const datos = useContext(Contexto);
+    const {categorias} = datos
     return (
-        <Principal>
-            <Banner />
-            <Categoria nombre='Front End' color='#6BD1FF' />
-            <Categoria nombre='Back End' color='#9CD33B' />
-            <Categoria nombre='Innovación y gestión' color='#6B5BE2' />
-        </Principal>
+            <Principal>
+                <Banner />
+                {
+                    categorias.map((categoria, indice) => {
+                        return (
+                            <Categoria categoria_id={categoria.id} nombre={categoria.nombre} color={categoria.color} key={indice} />
+                        );
+                    })
+                }
+            </Principal>
     );
 }

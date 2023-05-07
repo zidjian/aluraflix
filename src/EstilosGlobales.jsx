@@ -55,4 +55,8 @@ export const EstilosGlobales = createGlobalStyle`
         font-family: 'Roboto';
         font-weight: 400;
     }
+
+    body {
+        background-color: ${({theme}) => theme.oscuro};
+    }
 `

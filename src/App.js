@@ -11,19 +11,19 @@ import { EstilosGlobales } from "./EstilosGlobales";
 
 function App() {
     return (
+        <ThemeProvider theme={temaClaro}>
+            <EstilosGlobales />
             <Router>
-                <ThemeProvider theme={temaClaro}>
-                    <EstilosGlobales />
-                    <Cabecera />
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/video" element={<Video />} />
-                        <Route path="/categoria" element={<Categoria />} />
-                        <Route path="*" element={<Home />} />
-                    </Routes>
-                    <PieDePagina />
-                </ThemeProvider>
+                <Cabecera />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/video" element={<Video />} />
+                    <Route path="/categoria" element={<Categoria />} />
+                    <Route path="*" element={<Home />} />
+                </Routes>
+                <PieDePagina />
             </Router>
+        </ThemeProvider>
     );
 }
 
