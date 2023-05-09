@@ -20,14 +20,12 @@ export function Carrucel({categoria_id, color}) {
             breakpoints={{
                 768: {
                     slidesPerView: 2,
-                    spaceBetween: 40,
                 },
                 1024: {
                     slidesPerView: 4,
-                    spaceBetween: 50,
                 },
             }}
-            loop={true}
+            // loop={true}
             pagination={{
                 clickable: true,
             }}

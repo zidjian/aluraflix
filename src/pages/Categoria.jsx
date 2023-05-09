@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ContenidoParcial, FormBoton } from "../components/UI/Estilos";
+import { ContenidoParcial, FormBoton, BotonLink, GrupoBotones, BotonesSeparador } from "../components/UI/Estilos";
 import * as yup from 'yup';
 import { useFormik } from "formik";
 import { TextField } from "@mui/material";
@@ -34,11 +34,6 @@ const PrincipalTitulo = styled.h1`
     text-align: center;
     font-weight: 700;
     font-size: 1.5rem;
-`;
-
-const GrupoBotones = styled.div`
-    display: flex;
-    justify-content: space-between;
 `;
 
 const esquemaDeValidacion = yup.object({
@@ -126,9 +121,19 @@ export function Categoria() {
                         error={formik.touched.codigo && Boolean(formik.errors.codigo)}
                         helperText={formik.touched.codigo && formik.errors.codigo}
                     />
-                    <FormBoton color="#2A7AE4" type="submit">
-                        Guardar
-                    </FormBoton>
+                    <GrupoBotones >
+                        <BotonesSeparador >
+                            <FormBoton color="#2A7AE4" type="submit">
+                                Guardar
+                            </FormBoton>
+                            <FormBoton color="#cfcfcf" type="reset" onClick={formik.resetForm}>
+                                Limpiar
+                            </FormBoton>
+                        </BotonesSeparador>
+                        <BotonLink tipo='lineas' color="#cfcfcf" to='../video' >
+                            Nueva Video
+                        </BotonLink>
+                    </GrupoBotones>
                 </form>
             </PrincipalContenido>
         </Principal>

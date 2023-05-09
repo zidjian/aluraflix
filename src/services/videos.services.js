@@ -8,3 +8,13 @@ export const listarVideos = async (url, setDatos) => {
     const respuesta = await api.get(url);
     setDatos(respuesta)
 } 
+
+export const eliminarVideo = async (id) => {
+    const respuesta = await api.delete(`/videos/${id}`);
+    return respuesta;
+}
+
+export const obtenerVideo = async (id, setDatos) => {
+    const respuesta = await api.get(`/videos/${id}`);
+    setDatos(respuesta.data);
+}

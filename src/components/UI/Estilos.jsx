@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export const ContenidoCompleto = styled.div`
@@ -60,6 +61,7 @@ export const FormBoton = styled.button`
     font-weight: 300;
     font-size: 1rem;
     border: none;
+    cursor: pointer;
     ${
         ({ tipo, color }) => {
             switch (tipo) {
@@ -70,4 +72,40 @@ export const FormBoton = styled.button`
             }
         }
     };
+`;
+
+export const BotonLink = styled(Link)`
+    text-transform: capitalize;
+    text-align: center;
+    padding: calc(.5rem - 2px) calc(2rem - 2px);
+    line-height: 1;
+    box-sizing: border-box;
+    border-radius: .25rem;
+    font-weight: 300;
+    font-size: 1rem;
+    text-decoration: none;
+    ${({ tipo, color }) => {
+        switch (tipo) {
+            case 'lineas':
+                return `display: inline-block; border: 1px solid ${color}; color: ${color};`
+            default:
+                return `display: inline-block; background-color: ${color}; color: black;`
+        }
+    }
+    };
+    display: none;
+    @media screen and (min-width: 1024px) {
+        display: initial;
+    }
+`;
+
+export const GrupoBotones = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+`;
+
+export const BotonesSeparador = styled.div`
+    display: flex;
+    gap: 1rem;
 `;

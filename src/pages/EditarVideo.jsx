@@ -3,7 +3,6 @@ import { BotonLink, ContenidoParcial, FormBoton, GrupoBotones, BotonesSeparador 
 import * as yup from 'yup';
 import { useFormik } from "formik";
 import { TextField } from "@mui/material";
-import { Tabla } from "../components/Tabla";
 import { useParams } from "react-router-dom";
 import { obtenerVideo } from "../services/videos.services";
 import { useEffect, useState } from "react";
@@ -71,21 +70,52 @@ const esquemaDeValidacion = yup.object({
         .required('El cambo es obligatorio'),
 });
 
-export function Video() {
+export function EditarVideo() {
+    const { id } = useParams();
+    const [video, setVideo] = useState();
+
+    const valores_iniciales = {
+        titulo: '',
+        enlace_video: '',
+        enlace_imagen: '',
+        categoria: '',
+        descripcion: '',
+        codigo: '',
+    };
+
     const formik = useFormik({
         initialValues: {
-            titulo: '',
-            enlace_video: '',
-            enlace_imagen: '',
-            categoria: '',
-            descripcion: '',
-            codigo: '',
+            valores_iniciales
         },
+        enableReinitialize: true,
         validationSchema: esquemaDeValidacion,
         onSubmit: (values) => {
             console.log(JSON.stringify(values, null, 2));
         },
     });
+
+    function obtenerDatos() {
+        obtenerVideo(id, setVideo)
+    }
+    
+    useEffect(() => {
+        async function llamar() {
+            await obtenerDatos()
+        }
+        llamar()
+        console.log(video)
+    }, [])
+    // useEffect(() => {
+    //     obtenerVideo(id, setVideo)
+    //     formik.setValues({
+    //         titulo: 'hola',
+    //         enlace_video: '',
+    //         enlace_imagen: '',
+    //         categoria: '',
+    //         descripcion: '',
+    //         codigo: '',
+    //     })
+    // }, [id])
 
     return (
         <Principal>
@@ -166,7 +196,6 @@ export function Video() {
                         </BotonLink>
                     </GrupoBotones>
                 </form>
-                <Tabla />
             </PrincipalContenido>
         </Principal>
     );
