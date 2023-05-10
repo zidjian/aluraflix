@@ -80,7 +80,6 @@ export function EditarCategoria() {
         validationSchema: esquemaDeValidacion,
         onSubmit: (values) => {
             const { nombre, descripcion, color, codigo } = values
-            console.log(values)
             actualizarCategoria(id, {
                 nombre,
                 descripcion,
