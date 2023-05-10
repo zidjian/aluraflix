@@ -13,9 +13,7 @@ const Header = styled.div`
 const HeaderContenido = styled(ContenidoParcial)`
     display: flex;
     justify-content: center;
-    @media screen and (min-width: 1024px) {
-        justify-content: space-between;
-    }
+    justify-content: space-between;
 `;
 
 const HeaderLink = styled(Link)`

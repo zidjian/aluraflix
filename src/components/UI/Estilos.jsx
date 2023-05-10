@@ -93,7 +93,6 @@ export const BotonLink = styled(Link)`
         }
     }
     };
-    display: none;
     @media screen and (min-width: 1024px) {
         display: initial;
     }
@@ -102,6 +101,8 @@ export const BotonLink = styled(Link)`
 export const GrupoBotones = styled.div`
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin-top: 1rem;
 `;
 
