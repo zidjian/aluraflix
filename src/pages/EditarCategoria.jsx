@@ -3,10 +3,12 @@ import { ContenidoParcial, FormBoton, BotonLink, GrupoBotones, BotonesSeparador 
 import * as yup from 'yup';
 import { useFormik } from "formik";
 import { TextField } from "@mui/material";
-import { Tabla } from "../components/Tabla";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { actualizarCategoria, obtenerCategoria } from "../services/categorias.services";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { Contexto } from "../Contexto";
-import { crearCategoria, eliminarCategoria } from "../services/categorias.services";
 
 const Principal = styled.main`
     background: ${({ theme }) => theme.oscuro};
@@ -56,14 +58,12 @@ const esquemaDeValidacion = yup.object({
         .required('El cambo es obligatorio'),
 });
 
-export function Categoria() {
+export function EditarCategoria() {
+    const { id } = useParams();
+    const [categoria, setCategoria] = useState();
     const datos = useContext(Contexto)
-    const { categorias, valor, recargar } = datos;
-
-    const colmnas = [
-        { field: 'nombre', headerName: 'Nombre', flex: 1 },
-        { field: 'descripcion', headerName: 'Descripción', flex: 2 },
-    ]
+    const { valor, recargar } = datos;
+    const navegacion = useNavigate();
 
     function actualizar() {
         recargar(valor + 1);
@@ -71,27 +71,36 @@ export function Categoria() {
 
     const formik = useFormik({
         initialValues: {
-            nombre: '',
-            descripcion: '',
-            color: '#dcdcdc',
-            codigo: '',
+            nombre: categoria ? categoria.nombre : '',
+            descripcion: categoria ? categoria.descripcion : '',
+            color: categoria ? categoria.color : '#dcdcdc',
+            codigo: categoria ? categoria.codigo : '',
         },
         enableReinitialize: true,
         validationSchema: esquemaDeValidacion,
         onSubmit: (values) => {
             const { nombre, descripcion, color, codigo } = values
-            formik.resetForm();
-            crearCategoria({
+            console.log(values)
+            actualizarCategoria(id, {
                 nombre,
                 descripcion,
                 color,
                 codigo
             })
                 .then(() => {
-                    actualizar();
-                })
+                    actualizar()
+                    navegacion('/categoria')
+                });
         },
     });
+
+    useEffect(() => {
+        async function llamar() {
+            const respuesta = await obtenerCategoria(id);
+            setCategoria(respuesta)
+        }
+        llamar()
+    }, [id])
 
     return (
         <Principal>
@@ -103,7 +112,7 @@ export function Categoria() {
                         margin="normal"
                         id="nombre"
                         name="nombre"
-                        label="nombre"
+                        label="Nombre"
                         variant="filled"
                         value={formik.values.nombre}
                         onChange={formik.handleChange}
@@ -150,18 +159,17 @@ export function Categoria() {
                     <GrupoBotones >
                         <BotonesSeparador >
                             <FormBoton color="#2A7AE4" type="submit">
-                                Guardar
+                                Actualizar
                             </FormBoton>
                             <FormBoton color="#cfcfcf" type="reset" onClick={formik.resetForm}>
                                 Limpiar
                             </FormBoton>
                         </BotonesSeparador>
-                        <BotonLink tipo='lineas' color="#cfcfcf" to='../video' >
-                            Nueva Video
+                        <BotonLink tipo='lineas' color="#cfcfcf" to='../categoria' >
+                            Regresar
                         </BotonLink>
                     </GrupoBotones>
                 </form>
-                <Tabla db={categorias} colmnas={colmnas} actualizar={actualizar} eliminar={eliminarCategoria} />
             </PrincipalContenido>
         </Principal>
     );

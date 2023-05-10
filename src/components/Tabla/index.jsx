@@ -1,11 +1,7 @@
 import { DataGrid } from '@mui/x-data-grid';
-import { useContext } from 'react';
-import { Contexto } from '../../Contexto';
-import { Boton } from '../UI/Estilos';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import styled from 'styled-components';
-import { eliminarVideo } from '../../services/videos.services';
 import { Link } from 'react-router-dom';
 
 const TablaDataGrid = styled(DataGrid)`
@@ -20,20 +16,12 @@ const TablaDataGrid = styled(DataGrid)`
     } */
 `;
 
-export function Tabla() {
-    const datos = useContext(Contexto)
-    const { videos, valor, recargar } = datos;
-
-    function actualizar() {
-        recargar(valor + 1);
-    }
-
+export function Tabla({db, colmnas, actualizar, eliminar}) {
     return (
         <TablaDataGrid
-            rows={videos}
+            rows={db}
             columns={[
-                { field: 'titulo', headerName: 'Titulo', flex: 1 },
-                { field: 'categoria', headerName: 'Categoria' },
+                ...colmnas,
                 {
                     field: 'acciones',
                     headerName: 'Acciones',
@@ -43,13 +31,15 @@ export function Tabla() {
                         const { id } = params.row
                         const onClick = (e) => {
                             e.stopPropagation();
-                            eliminarVideo(id);
-                            actualizar();
+                            eliminar(id)
+                                .then(() => {
+                                    actualizar();
+                                });
                         };
 
                         return (
                             <>
-                                <DeleteIcon sx={{ color: 'red' }} />
+                                <DeleteIcon sx={{ color: 'red' }} onClick={onClick} />
                                 <Link to={`${id}`} >
                                     <EditIcon sx={{ color: 'orange' }} />
                                 </Link>

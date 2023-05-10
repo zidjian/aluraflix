@@ -2,12 +2,11 @@ import styled from "styled-components";
 import { BotonLink, ContenidoParcial, FormBoton, GrupoBotones, BotonesSeparador } from "../components/UI/Estilos";
 import * as yup from 'yup';
 import { useFormik } from "formik";
-import { TextField } from "@mui/material";
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select, TextField } from "@mui/material";
 import { Tabla } from "../components/Tabla";
-import { useParams } from "react-router-dom";
-import { obtenerVideo } from "../services/videos.services";
-import { useEffect, useState } from "react";
-
+import { useContext } from "react";
+import { Contexto } from "../Contexto";
+import { crearVideo, eliminarVideo } from "../services/videos.services";
 
 const Principal = styled.main`
     background: ${({ theme }) => theme.oscuro};
@@ -34,6 +33,23 @@ const Campo = styled(TextField)`
     }
 `;
 
+const Selector = styled(FormControl)`
+    .MuiSelect-select, .MuiSelect-select, .MuiFormLabel-root, .MuiSelect-iconFilled:focus {
+        background-color: ${({ theme }) => theme.semioscuro} !important;
+        color: ${({ theme }) => theme.texto} !important;
+
+    }
+    .MuiSelect-nativeInput, .MuiFormLabel-root	{
+        color: ${({ theme }) => theme.texto};
+    }
+    .MuiSelect-icon	 {
+        color: ${({ theme }) => theme.texto};
+    }
+    .MuiFormLabel-root.Mui-error {
+        color: ${({ theme }) => theme.texto};
+    }
+`;
+
 const PrincipalTitulo = styled.h1`
     color: ${({ theme }) => theme.texto};
     text-align: center;
@@ -47,17 +63,11 @@ const esquemaDeValidacion = yup.object({
         .required('El cambo es obligatorio'),
     enlace_video: yup
         .string()
-        .matches(
-            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-            'Ingrese una url valida.'
-        )
+        .url('Ingrese un enlace valido')
         .required('El cambo es obligatorio'),
     enlace_imagen: yup
         .string()
-        .matches(
-            /((https?):\/\/)?(www.)?[a-z0-9]+(\.[a-z]{2,}){1,3}(#?\/?[a-zA-Z0-9#]+)*\/?(\?[a-zA-Z0-9-_]+=[a-zA-Z0-9-%]+&?)?$/,
-            'Ingrese una url valida.'
-        )
+        .url('Ingrese un enlace valido')
         .required('El cambo es obligatorio'),
     categoria: yup
         .string()
@@ -72,6 +82,18 @@ const esquemaDeValidacion = yup.object({
 });
 
 export function Video() {
+    const datos = useContext(Contexto)
+    const { videos, categorias, valor, recargar } = datos;
+
+    const colmnas = [
+        { field: 'titulo', headerName: 'Titulo', flex: 1 },
+        { field: 'categoria', headerName: 'Categoria' },
+    ]
+
+    function actualizar() {
+        recargar(valor + 1);
+    }
+
     const formik = useFormik({
         initialValues: {
             titulo: '',
@@ -81,9 +103,22 @@ export function Video() {
             descripcion: '',
             codigo: '',
         },
+        enableReinitialize: true,
         validationSchema: esquemaDeValidacion,
         onSubmit: (values) => {
-            console.log(JSON.stringify(values, null, 2));
+            const { titulo, enlace_video, enlace_imagen, categoria, descripcion, codigo } = values
+            formik.resetForm();
+            crearVideo({
+                titulo,
+                link_video: enlace_video,
+                link_imagen: enlace_imagen,
+                categoria,
+                descripcion,
+                codigo
+            })
+                .then(() => {
+                    actualizar();
+                })
         },
     });
 
@@ -128,6 +163,31 @@ export function Video() {
                         error={formik.touched.enlace_imagen && Boolean(formik.errors.enlace_imagen)}
                         helperText={formik.touched.enlace_imagen && formik.errors.enlace_imagen}
                     />
+                    <Selector
+                        fullWidth
+                        margin="normal"
+                        variant="filled"
+                        error={formik.touched.categoria && Boolean(formik.errors.categoria)}
+                    >
+                        <InputLabel id="categoria-rotulo">Categoria</InputLabel>
+                        <Select
+                            id="categoria"
+                            label="Categoria"
+                            name="categoria"
+                            value={formik.values.categoria}
+                            onBlur={formik.handleBlur}
+                            onChange={(e) => formik.setFieldValue('categoria', e.target.value)}
+                        >
+                            {
+                                categorias.map((categoria, indice) => {
+                                    return (
+                                        <MenuItem value={categoria.id} key={indice} >{categoria.nombre}</MenuItem>
+                                    )
+                                })
+                            }
+                        </Select>
+                        <FormHelperText>{formik.touched.categoria && formik.errors.categoria}</FormHelperText>
+                    </Selector>
                     <Campo
                         fullWidth
                         margin="normal"
@@ -166,7 +226,7 @@ export function Video() {
                         </BotonLink>
                     </GrupoBotones>
                 </form>
-                <Tabla />
+                <Tabla db={videos} colmnas={colmnas} actualizar={actualizar} eliminar={eliminarVideo} />
             </PrincipalContenido>
         </Principal>
     );

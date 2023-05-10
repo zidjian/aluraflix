@@ -2,9 +2,6 @@ import styled from "styled-components";
 import banner from '../../assets/img/banner.png'
 import { Boton, ContenidoParcial } from "../UI/Estilos";
 
-// RECURSOS:
-import imagenEjemplo from '../../assets/img/video.png'
-
 const Anuncio = styled.div`
     background-image: linear-gradient(0deg, ${({theme}) => theme.oscuro} 0%, rgba(0,0,0,0) 100%),
     url(${banner});
@@ -97,8 +94,8 @@ export function Banner() {
                     <AnuncioDetalle>Este challenge es una forma de aprendizaje. Es un mecanismo donde podrás comprometerte en la resolución de un problema para poder aplicar todos los conocimientos adquiridos en la formación React.</AnuncioDetalle>
                     <AnuncioBoton tipo='completo' color='#fff' href="#" >Ver</AnuncioBoton>
                 </AnuncioDescripcion>
-                <AnuncioLink href="">
-                    <AnuncioImagen src={imagenEjemplo} />
+                <AnuncioLink href="https://youtu.be/C_wBJGhauMY" target="__blank">
+                    <AnuncioImagen src='https://ik.imagekit.io/noj6wnuqy/AluraFLix/tr:f-webp/video.2d556f83d1075ca96dc0.png?updatedAt=1683685012733' />
                 </AnuncioLink>
             </AnuncioContenido>
         </Anuncio>

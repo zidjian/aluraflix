@@ -3,16 +3,13 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
 import { Pagination, Navigation } from "swiper";
-
 import { CardVideo } from '../CardVideo';
 import { useContext } from 'react';
-
 import { Contexto } from '../../Contexto';
 
 export function Carrucel({categoria_id, color}) {
     const datos = useContext(Contexto);
-    const videos = datos.videos.filter((dato) => dato.categoria === categoria_id );
-    
+    const videos = datos.videos.filter((dato) => dato.categoria+'' === ''+categoria_id );
     return (
         <Swiper
             spaceBetween={16}

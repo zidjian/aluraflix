@@ -10,15 +10,20 @@ const Principal = styled.main`
 
 export function Home() {
     const datos = useContext(Contexto);
-    const { categorias } = datos
+    const { categorias, videos } = datos
     return (
         <Principal>
             <Banner />
             {
+                videos.length > 0 &&
                 categorias.map((categoria, indice) => {
-                    return (
-                        <Categoria categoria_id={categoria.id} nombre={categoria.nombre} color={categoria.color} key={indice} />
-                    );
+                    const cantidad_videos = videos.filter((dato) => dato.categoria+'' === ''+categoria.id );
+                    if(cantidad_videos.length > 0) {
+                        return (
+                            <Categoria categoria={categoria} key={indice} />
+                        );
+                    }
+                    return '';
                 })
             }
         </Principal>

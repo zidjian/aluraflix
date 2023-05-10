@@ -10,6 +10,7 @@ import { ThemeProvider } from "styled-components";
 import { temaClaro } from "./components/UI/Temas";
 import { EstilosGlobales } from "./EstilosGlobales";
 import { EditarVideo } from "./pages/EditarVideo";
+import { EditarCategoria } from "./pages/EditarCategoria";
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/video" element={<Video />} />
                     <Route path="/video/:id" element={<EditarVideo />} />
                     <Route path="/categoria" element={<Categoria />} />
+                    <Route path="/categoria/:id" element={<EditarCategoria />} />
                     <Route path="*" element={<Error404 />} />
                 </Routes>
                 <PieDePagina />

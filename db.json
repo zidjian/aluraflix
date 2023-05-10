@@ -1,16 +1,7 @@
 {
   "videos": [
     {
-      "id": 2,
-      "titulo": "Back End",
-      "link_video": "https://www.youtube.com/watch?v=Z024LSCMqFk&t=178s",
-      "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault.webp?updatedAt=1683420422821",
-      "categoria": 2,
-      "descripcion": "Back End",
-      "codigo": 12345678
-    },
-    {
-      "id": 3,
+      "id": "3",
       "titulo": "La magia detrás de Java #aluramás",
       "link_video": "https://www.youtube.com/watch?v=GrEO8nZzyZM",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__3_.webp?updatedAt=1683420408396",
@@ -19,7 +10,7 @@
       "codigo": 12345678
     },
     {
-      "id": 4,
+      "id": "4",
       "titulo": "Banco de datos MySQL Contenidos de ONE",
       "link_video": "https://www.youtube.com/watch?v=8J0AoPZMVxA",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__2_.webp?updatedAt=1683420408360",
@@ -28,7 +19,7 @@
       "codigo": 12345678
     },
     {
-      "id": 5,
+      "id": "5",
       "titulo": "Spring Framework. ¿Qué es ? #AluraMás",
       "link_video": "https://www.youtube.com/watch?v=t-iqt1b2qqk",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__5_.webp?updatedAt=1683420408323",
@@ -37,7 +28,7 @@
       "codigo": 12345678
     },
     {
-      "id": 6,
+      "id": "6",
       "titulo": "Simplificando tu código en Java: Conoce los enum #AluraMás",
       "link_video": "https://www.youtube.com/watch?v=EoPvlE85XAQ",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__4_.webp?updatedAt=1683420408357",
@@ -46,7 +37,7 @@
       "codigo": 12345678
     },
     {
-      "id": 7,
+      "id": "7",
       "titulo": "Spring Framework. ¿Qué es ? #AluraMás",
       "link_video": "https://www.youtube.com/watch?v=t-iqt1b2qqk",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__5_.webp?updatedAt=1683420408323",
@@ -55,7 +46,7 @@
       "codigo": 12345678
     },
     {
-      "id": 9,
+      "id": "9",
       "titulo": "Animando un texto en HTML y CSS #AluraMás",
       "link_video": "https://www.youtube.com/watch?v=j71g5TiMA-M",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__8_.webp?updatedAt=1683420539462",
@@ -64,7 +55,7 @@
       "codigo": 12345678
     },
     {
-      "id": 10,
+      "id": "10",
       "titulo": "¿Qué es JavaScript?",
       "link_video": "https://www.youtube.com/watch?v=GJfOSoaXk4s",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__10_.webp?updatedAt=1683420539411",
@@ -73,7 +64,7 @@
       "codigo": 12345678
     },
     {
-      "id": 11,
+      "id": "11",
       "titulo": "Consejos de CSS FlexBox para comenzar #aluramás",
       "link_video": "https://www.youtube.com/watch?v=EB4vWLzfVcI",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__11_.webp?updatedAt=1683420539420",
@@ -82,7 +73,7 @@
       "codigo": 12345678
     },
     {
-      "id": 12,
+      "id": "12",
       "titulo": "¿Por qué utilizar React?",
       "link_video": "https://www.youtube.com/watch?v=MnBNPA45NW8",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__9_.webp?updatedAt=1683420539407",
@@ -91,7 +82,7 @@
       "codigo": 12345678
     },
     {
-      "id": 13,
+      "id": "13",
       "titulo": "Box Model y Box sizing #AluraMás",
       "link_video": "https://www.youtube.com/watch?v=ts9qfCKamKg",
       "link_imagen": "https://ik.imagekit.io/noj6wnuqy/AluraFLix/hqdefault__7_.webp?updatedAt=1683420539290",
@@ -102,14 +93,14 @@
   ],
   "categorias": [
     {
-      "id": 1,
+      "id": "1",
       "nombre": "Front End",
       "descripcion": "Formación de front end de Alura Latam",
       "color": "#5df45e",
       "codigo": "1"
     },
     {
-      "id": 2,
+      "id": "2",
       "nombre": "Back End",
       "descripcion": "Formación de back end de Alura Latam",
       "color": "#ffffff",

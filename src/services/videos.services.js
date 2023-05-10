@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const api = axios.create({
-    baseURL: 'http://localhost:5000'
+    baseURL: 'https://645a7bf565bd868e931c8456.mockapi.io/'
 });
 
 export const listarVideos = async (url, setDatos) => {
@@ -14,7 +14,21 @@ export const eliminarVideo = async (id) => {
     return respuesta;
 }
 
-export const obtenerVideo = async (id, setDatos) => {
+export const obtenerVideo = async (id) => {
     const respuesta = await api.get(`/videos/${id}`);
-    setDatos(respuesta.data);
+    return respuesta.data;
+}
+
+export const crearVideo = async (datos) => {
+    const respuesta = await api.post(`/videos`, {
+        ...datos
+    });
+    return respuesta;
+}
+
+export const actualizarVideo = async (id, datos) => {
+    const respuesta = await api.put(`/videos/${id}`, {
+        ...datos
+    });
+    return respuesta;
 }
